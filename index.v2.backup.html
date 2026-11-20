@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team Portfolio · SOUL CAMP by Higgsfield</title>
+<meta name="description" content="Portfolio of Alina Abdrakhmanova, Shugyla Serikbay and Aruzhan Matzhan for SOUL CAMP by Higgsfield, Almaty.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0c0e;
+    --bg-2: #131517;
+    --card: #131517;
+    --border: rgba(255, 255, 255, 0.08);
+    --text: #ffffff;
+    --muted: #8b9096;
+    --lime: #d1fe17;
+    --pink: #ff005b;
+    --cyan: #9ce6f3;
+    --display: "Space Grotesk", "Inter", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  body::after {
+    content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 100; opacity: .06;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  ::selection { background: var(--lime); color: #131517; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  .blob { position: fixed; border-radius: 50%; filter: blur(140px); z-index: -1; pointer-events: none; }
+  .blob.a { width: 560px; height: 560px; background: var(--lime); top: -280px; left: 50%; transform: translateX(-50%); opacity: .14; }
+  .blob.b { width: 420px; height: 420px; background: var(--pink); top: 45%; right: -240px; opacity: .12; }
+  .blob.c { width: 380px; height: 380px; background: var(--cyan); bottom: -220px; left: -160px; opacity: .08; }
+
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    backdrop-filter: blur(16px);
+    background: rgba(11, 12, 14, 0.75);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { font-family: var(--display); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+  .logo i { width: 10px; height: 10px; background: var(--lime); border-radius: 50%; box-shadow: 0 0 16px var(--lime); }
+  .logo span { color: var(--lime); }
+  nav ul { display: flex; gap: 8px; list-style: none; font-size: 13px; font-weight: 500; color: var(--muted); }
+  nav ul a { padding: 8px 14px; border-radius: 999px; transition: all .2s; }
+  nav ul a:hover { color: var(--text); background: rgba(255,255,255,.06); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 999px;
+    background: var(--lime); color: #131517; font-weight: 600; font-size: 14px; transition: transform .2s, box-shadow .2s;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(209,254,23,.25); }
+  .btn.ghost { background: rgba(255,255,255,.06); color: var(--text); border: 1px solid var(--border); }
+  .btn.ghost:hover { box-shadow: none; border-color: rgba(255,255,255,.25); }
+  nav .btn { padding: 9px 18px; font-size: 13px; }
+
+  header.hero { padding: 100px 0 0; text-align: center; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px 6px 6px; border-radius: 999px;
+    border: 1px solid var(--border); background: var(--bg-2);
+    font-size: 13px; color: var(--muted); margin-bottom: 32px;
+  }
+  .pill b { background: var(--pink); color: #fff; font-size: 11px; padding: 3px 9px; border-radius: 999px; letter-spacing: .06em; text-transform: uppercase; }
+  .hero h1 {
+    font-family: var(--display); font-size: clamp(48px, 9.5vw, 128px); line-height: .92; font-weight: 700;
+    letter-spacing: -0.04em; text-transform: uppercase;
+  }
+  .hero h1 em { font-style: normal; color: var(--lime); }
+  .hero h1 .out { color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,.55); }
+  .hero p.lead { max-width: 640px; margin: 30px auto 0; font-size: 18px; color: var(--muted); }
+  .cta { display: flex; gap: 12px; justify-content: center; margin-top: 36px; flex-wrap: wrap; }
+  .avatars { display: flex; justify-content: center; margin-top: 40px; }
+  .avatars a {
+    width: 60px; height: 60px; border-radius: 50%; margin: 0 -7px;
+    display: grid; place-items: center; font-family: var(--display); font-weight: 700; font-size: 20px; color: #131517;
+    border: 3px solid var(--bg); transition: transform .2s;
+  }
+  .avatars a:hover { transform: translateY(-6px) rotate(-6deg); }
+
+  .marquee { margin-top: 80px; border-block: 1px solid var(--border); overflow: hidden; background: var(--lime); color: #131517; transform: rotate(-1.5deg); }
+  .marquee .track { display: flex; width: max-content; animation: scroll 28s linear infinite; }
+  .marquee span { font-family: var(--display); font-weight: 700; text-transform: uppercase; font-size: 22px; padding: 14px 0; white-space: nowrap; letter-spacing: -.01em; }
+  .marquee span::after { content: "✦"; margin: 0 28px; color: var(--pink); }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 90px; }
+  .stat { padding: 26px; border: 1px solid var(--border); border-radius: 20px; background: var(--card); text-align: left; }
+  .stat b { display: block; font-family: var(--display); font-size: 44px; line-height: 1.1; font-weight: 700; color: var(--lime); letter-spacing: -.03em; }
+  .stat:nth-child(2) b { color: var(--pink); }
+  .stat:nth-child(3) b { color: var(--cyan); }
+  .stat:nth-child(4) b { color: #fff; }
+  .stat span { font-size: 14px; color: var(--muted); }
+
+  section { padding: 90px 0; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; text-transform: uppercase; letter-spacing: .2em; color: var(--lime); font-weight: 600; }
+  .eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  h2 { font-family: var(--display); font-size: clamp(36px, 5.5vw, 64px); line-height: 1; font-weight: 700; letter-spacing: -0.035em; margin: 14px 0 20px; text-transform: uppercase; }
+  h2 em { font-style: normal; color: var(--lime); }
+  .sub { color: var(--muted); max-width: 640px; font-size: 17px; }
+
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 44px; }
+  .trio .card { transition: border-color .25s, transform .25s; }
+  .trio .card:hover { transform: translateY(-4px); border-color: rgba(209,254,23,.4); }
+  .trio .card h3 { font-family: var(--display); font-size: 22px; margin: 18px 0 8px; text-transform: uppercase; letter-spacing: -.01em; }
+  .trio .card p { color: var(--muted); font-size: 15px; }
+  .icon { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; font-size: 22px; }
+
+  .card { border: 1px solid var(--border); background: var(--card); border-radius: 24px; padding: 28px; }
+
+  .member { display: grid; grid-template-columns: 320px 1fr; gap: 32px; margin-top: 24px; padding: 36px; }
+  .member .side { border-right: 1px solid var(--border); padding-right: 32px; }
+  .photo {
+    width: 100%; aspect-ratio: 4 / 3; border-radius: 18px; display: grid; place-items: center;
+    font-family: var(--display); font-size: 72px; font-weight: 700; color: #131517; margin-bottom: 22px; letter-spacing: -.05em;
+    position: relative; overflow: hidden;
+  }
+  .photo::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0,0,0,.05) 0 2px, transparent 2px 4px); }
+  .g1 { background: var(--lime); }
+  .g2 { background: var(--pink); color: #fff !important; }
+  .g3 { background: var(--cyan); }
+  .member h3 { font-family: var(--display); font-size: 30px; line-height: 1.05; text-transform: uppercase; letter-spacing: -.02em; }
+  .member .role { color: var(--lime); font-weight: 600; font-size: 14px; margin: 10px 0 14px; }
+  .member .loc { color: var(--muted); font-size: 14px; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .links a {
+    font-size: 13px; font-weight: 600; padding: 8px 15px; border-radius: 999px;
+    background: var(--lime); color: #131517; transition: all .2s;
+  }
+  .links a:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(209,254,23,.25); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+  .tags span { font-size: 12px; padding: 5px 11px; border-radius: 999px; background: rgba(255,255,255,.05); border: 1px solid var(--border); color: #d6d9dc; }
+
+  .about { color: #c4c8cc; margin-bottom: 30px; font-size: 16.5px; }
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before { content: ""; position: absolute; left: 4px; top: 8px; bottom: 8px; width: 1px; background: var(--border); }
+  .item { position: relative; margin-bottom: 22px; }
+  .item::before { content: ""; position: absolute; left: -24px; top: 8px; width: 9px; height: 9px; border-radius: 50%; background: var(--bg); border: 2px solid var(--lime); }
+  .item:first-child::before { background: var(--lime); box-shadow: 0 0 12px var(--lime); }
+  .item .head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .item h4 { font-size: 16px; font-weight: 600; }
+  .item h4 small { color: var(--muted); font-weight: 500; }
+  .item time { font-size: 12px; color: var(--muted); white-space: nowrap; font-family: var(--display); text-transform: uppercase; letter-spacing: .06em; }
+  .item ul { margin: 8px 0 0 18px; color: var(--muted); font-size: 14.5px; }
+  .item ul li { margin-bottom: 4px; }
+  .item ul li::marker { color: var(--lime); }
+  .badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 999px; background: var(--pink); color: #fff; margin-left: 6px; vertical-align: middle; font-weight: 700; }
+  .block-title { font-family: var(--display); font-size: 12px; text-transform: uppercase; letter-spacing: .18em; color: var(--muted); font-weight: 600; margin: 32px 0 14px; }
+
+  .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 44px; }
+  .project { position: relative; overflow: hidden; transition: transform .25s, border-color .25s; }
+  .project::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--lime); transform: scaleX(0); transform-origin: left; transition: transform .35s; }
+  .project:hover { transform: translateY(-4px); border-color: rgba(209,254,23,.3); }
+  .project:hover::before { transform: scaleX(1); }
+  .project .who { font-size: 11px; color: var(--lime); text-transform: uppercase; letter-spacing: .16em; font-weight: 600; }
+  .project h3 { font-family: var(--display); font-size: 24px; line-height: 1.15; margin: 12px 0 10px; text-transform: uppercase; letter-spacing: -.015em; }
+  .project p { color: var(--muted); font-size: 15px; }
+  .project .tags { margin-top: 18px; }
+
+  .why { text-align: center; }
+  .why .card {
+    max-width: 900px; margin: 34px auto 0; padding: 56px 48px; font-size: 20px; color: #c4c8cc;
+    background: radial-gradient(120% 140% at 50% 0%, rgba(209,254,23,.12), transparent 60%), var(--card);
+  }
+  .why .card strong { color: var(--lime); font-weight: 600; }
+
+  footer { border-top: 1px solid var(--border); padding: 60px 0 40px; text-align: center; color: var(--muted); font-size: 14px; }
+  footer .big { font-family: var(--display); font-weight: 700; text-transform: uppercase; font-size: clamp(48px, 12vw, 160px); line-height: .9; letter-spacing: -.05em; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.15); margin-bottom: 30px; }
+
+  @media (max-width: 900px) {
+    nav ul { display: none; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .trio, .projects { grid-template-columns: 1fr; }
+    .member { grid-template-columns: 1fr; padding: 24px; }
+    .member .side { border-right: 0; padding-right: 0; border-bottom: 1px solid var(--border); padding-bottom: 24px; }
+  }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+<div class="blob a"></div>
+<div class="blob b"></div>
+<div class="blob c"></div>
+
+<nav>
+  <div class="wrap">
+    <a href="#" class="logo"><i></i>Team <span>A·S·A</span></a>
+    <ul>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#alina">Alina</a></li>
+      <li><a href="#shugyla">Shugyla</a></li>
+      <li><a href="#aruzhan">Aruzhan</a></li>
+      <li><a href="#projects">Projects</a></li>
+    </ul>
+    <a href="#projects" class="btn">See our work →</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="pill"><b>Soul Camp</b> Application portfolio · Higgsfield · Almaty</div>
+    <h1>Three <em>souls.</em><br><span class="out">Data. Strategy.</span><br>Code.</h1>
+    <p class="lead">We are a team of three Nazarbayev University graduates now working at Kaspi.kz — a data miner, a data analyst and a backend engineer building an AI assistant. Together we turn data into insight and insight into products.</p>
+    <div class="cta">
+      <a href="#team" class="btn">Meet the team ✦</a>
+      <a href="#projects" class="btn ghost">Explore projects</a>
+    </div>
+    <div class="avatars">
+      <a href="#alina" class="g1" title="Alina Abdrakhmanova">A</a>
+      <a href="#shugyla" class="g2" title="Shugyla Serikbay">S</a>
+      <a href="#aruzhan" class="g3" title="Aruzhan Matzhan">A</a>
+    </div>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Data mining</span><span>Strategy</span><span>AI assistant</span><span>Vector search</span><span>Analytics</span><span>Case championships</span><span>Golang</span><span>Kafka</span><span>Python</span><span>SQL</span>
+      <span>Data mining</span><span>Strategy</span><span>AI assistant</span><span>Vector search</span><span>Analytics</span><span>Case championships</span><span>Golang</span><span>Kafka</span><span>Python</span><span>SQL</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat reveal"><b>3</b><span>NU graduates, all at Kaspi.kz</span></div>
+      <div class="stat reveal"><b>500+</b><span>students engaged through events we led</span></div>
+      <div class="stat reveal"><b>40%</b><span>SQL speed-up delivered in production</span></div>
+      <div class="stat reveal"><b>1</b><span>AI assistant used across Kazakhstan</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="team">
+  <div class="wrap">
+    <div class="eyebrow">The team</div>
+    <h2>A full product loop <em>in one team</em></h2>
+    <p class="sub">Between the three of us we cover the whole path from a business problem to a working product: understanding the market, digging into the data, and shipping reliable, AI-powered backend systems.</p>
+    <div class="trio">
+      <div class="card reveal">
+        <div class="icon g1">📊</div>
+        <h3>Strategy &amp; Product</h3>
+        <p>Alina — consulting background at PwC, BCG FutureHER alumna, case-competition winner and a leader who built a 35-person team.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon g2">🔍</div>
+        <h3>Data &amp; Analytics</h3>
+        <p>Shugyla — mathematician and Data Science master's student (GPA 3.92) turning raw data into decisions with SQL and Python.</p>
+      </div>
+      <div class="card reveal">
+        <div class="icon g3">⚙️</div>
+        <h3>Engineering &amp; AI</h3>
+        <p>Aruzhan — backend engineer on Kaspi's AI assistant, working with vector search (HNSW), Kafka and distributed systems.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="alina">
+  <div class="wrap">
+    <div class="eyebrow">Member 01</div>
+    <div class="card member reveal">
+      <div class="side">
+        <div class="photo g1">AA</div>
+        <h3>Alina Abdrakhmanova</h3>
+        <div class="role">Data Miner · Kaspi.kz</div>
+        <div class="loc">📍 Almaty, Kazakhstan</div>
+        <div class="links">
+          <a href="https://www.linkedin.com/in/alina-abdrakhmanova/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+        <div class="tags">
+          <span>Data analysis</span><span>Strategy</span><span>Consulting</span><span>Leadership</span><span>Public Relations</span><span>Event management</span>
+        </div>
+        <div class="block-title">Education</div>
+        <div class="loc"><b style="color:var(--text)">Nazarbayev University</b><br>BSc Mathematics · 2021–2025</div>
+        <div class="loc" style="margin-top:10px"><b style="color:var(--text)">Nazarbayev Intellectual Schools</b><br>2015–2021</div>
+      </div>
+      <div>
+        <p class="about">Mathematics graduate from Nazarbayev University with experience in consulting, analytics and leadership. At PwC I supported top banks in Kazakhstan and Uzbekistan by analyzing financial data and superapp market trends. I have competed in and won recognition at multiple international and local case competitions — I thrive at the intersection of analysis, problem-solving and growth.</p>
+
+        <div class="timeline">
+          <div class="item">
+            <div class="head"><h4>Data Miner <small>· Kaspi.kz</small></h4><time>Sep 2026 – Present</time></div>
+          </div>
+          <div class="item">
+            <div class="head"><h4>S&amp;O Consulting Intern <small>· PwC</small></h4><time>Jun – Aug 2024</time></div>
+            <ul>
+              <li>Selected after top performance at PwC's highly selective Future Solvers Academy; received offers from Strategy &amp; Operations, Audit and M&amp;A.</li>
+              <li>Worked with high-profile banking clients, including Uzbekistan's market leader and Kazakhstan's top-ranked bank.</li>
+              <li>Built data-driven presentations and insights on the banking and superapp markets in KZ and UZ.</li>
+            </ul>
+          </div>
+          <div class="item">
+            <div class="head"><h4>President <small>· Accounting and Auditing Club, NU</small></h4><time>Aug 2023 – Aug 2024</time></div>
+            <ul>
+              <li>Led a team of 35; built partnerships with Deloitte, EY, PwC and Mars.</li>
+              <li>Danone &amp; Mars case championship with 250+ participants, Big-4 case championship, 17 NU Alumni guest lectures.</li>
+              <li>Finalist in NU Student Awards (Professional Club) two years in a row.</li>
+            </ul>
+          </div>
+          <div class="item">
+            <div class="head"><h4>Head of Event Department / Event Manager <small>· AAC</small></h4><time>Jan 2022 – Aug 2023</time></div>
+            <ul><li>Organized Danone guest lecture &amp; workshop, Deloitte guest lecture and NU Alumni lectures end-to-end.</li></ul>
+          </div>
+          <div class="item">
+            <div class="head"><h4>Strategy Consultant Intern <small>· Dasco Consulting Group</small></h4><time>Jun – Aug 2023</time></div>
+            <ul><li>Analyzed global trends in postal and creative sectors; infrastructure assessments for Kazakhstan and cold regions (Canada, Russia, US).</li></ul>
+          </div>
+          <div class="item">
+            <div class="head"><h4>Brand Ambassador <small>· EY</small></h4><time>Oct 2022 – Jun 2023</time></div>
+          </div>
+          <div class="item">
+            <div class="head"><h4>Business Program Intern <small>· Astana Hub</small></h4><time>Sep – Nov 2022</time></div>
+            <ul><li>Coordinated Digital Bridge 2022 "Hub Battle" — 150+ participants, 250+ applications.</li></ul>
+          </div>
+        </div>
+
+        <div class="block-title">Programs &amp; certificates</div>
+        <div class="tags">
+          <span>BCG FutureHER Talent Program · 2025</span>
+          <span>Datathon'24 by BI Group × DataSci</span>
+          <span>PwC Future Solvers Academy</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="shugyla">
+  <div class="wrap">
+    <div class="eyebrow">Member 02</div>
+    <div class="card member reveal">
+      <div class="side">
+        <div class="photo g2">SS</div>
+        <h3>Shugyla Serikbay</h3>
+        <div class="role">Junior Data Analyst · Kaspi.kz</div>
+        <div class="loc">📍 Almaty, Kazakhstan</div>
+        <div class="tags">
+          <span>SQL</span><span>Python</span><span>Data Science</span><span>Mathematics</span><span>Analytics</span>
+        </div>
+      </div>
+      <div>
+        <p class="about">Data analyst with a strong mathematical foundation. Bachelor's in Mathematics from Nazarbayev University, currently pursuing a Master's in Data Science at KBTU with a 3.92 GPA while working as a data analyst at Kaspi.kz — the country's largest superapp.</p>
+        <div class="timeline">
+          <div class="item">
+            <div class="head"><h4>Junior Data Analyst <small>· Kaspi.kz</small></h4><time>Dec 2025 – Present</time></div>
+            <ul><li>Analyzing product data with SQL and Python to support decisions at Kazakhstan's leading fintech superapp.</li></ul>
+          </div>
+        </div>
+        <div class="block-title">Education</div>
+        <div class="timeline">
+          <div class="item">
+            <div class="head"><h4>MSc Data Science <small>· Kazakh-British Technical University</small><span class="badge">GPA 3.92</span></h4><time>2025 – 2027</time></div>
+          </div>
+          <div class="item">
+            <div class="head"><h4>BSc Mathematics <small>· Nazarbayev University</small></h4><time>2021 – 2025</time></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="aruzhan">
+  <div class="wrap">
+    <div class="eyebrow">Member 03</div>
+    <div class="card member reveal">
+      <div class="side">
+        <div class="photo g3">AM</div>
+        <h3>Aruzhan Matzhan</h3>
+        <div class="role">Backend Developer · Java · Distributed Systems</div>
+        <div class="loc">📍 Almaty, Kazakhstan</div>
+        <div class="links">
+          <a href="https://github.com/belivinge" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://leetcode.com/u/belivinge/" target="_blank" rel="noopener">LeetCode ↗</a>
+          <a href="mailto:aruzhan.matzhan@nu.edu.kz">Email</a>
+        </div>
+        <div class="tags">
+          <span>Go</span><span>Java · Spring</span><span>Vert.x</span><span>Kafka</span><span>ElasticSearch</span><span>Redis</span><span>MongoDB</span><span>PostgreSQL</span><span>Docker</span><span>Kubernetes</span><span>CI/CD</span><span>REST API</span>
+        </div>
+        <div class="block-title">Education</div>
+        <div class="loc"><b style="color:var(--text)">Nazarbayev University</b><br>BSc Physics, minor in Computer Science · 2020–2024</div>
+        <div class="block-title">Languages</div>
+        <div class="loc">Kazakh — native<br>Russian — fluent<br>English — C1</div>
+      </div>
+      <div>
+        <p class="about">Backend engineer building AI products at scale. I work on the backend of Kaspi's AI assistant used by people all over Kazakhstan, with a focus on vector search, streaming data and reliable distributed systems.</p>
+        <div class="timeline">
+          <div class="item">
+            <div class="head"><h4>Software Engineer <small>· Kaspi.kz</small></h4><time>Oct 2025 – Present</time></div>
+            <ul>
+              <li>Develop and maintain backend components of Kaspi's AI assistant, used by Kaspi customers across Kazakhstan.</li>
+              <li>Work on vector search infrastructure and the HNSW algorithm for fast retrieval of relevant data.</li>
+              <li>Stack: Kafka, ElasticSearch, S3, Redis, MongoDB, Java Vert.x, Golang, Grafana.</li>
+            </ul>
+          </div>
+          <div class="item">
+            <div class="head"><h4>Backend Golang Developer <small>· Magnum</small></h4><time>Jul 2024 – Oct 2025</time></div>
+            <ul>
+              <li>Built microservices and monolithic applications in Go.</li>
+              <li>Optimized SQL queries and stored procedures in Oracle and PostgreSQL — up to 40% faster.</li>
+              <li>Real-time data processing with Kafka; monitoring with Prometheus; concurrency with goroutines.</li>
+            </ul>
+          </div>
+          <div class="item">
+            <div class="head"><h4>Backend Golang Developer <small>· Alem School</small></h4><time>Nov 2023 – May 2024</time></div>
+            <ul><li>Team development of web servers and microservices in Go (channels, goroutines).</li></ul>
+          </div>
+          <div class="item">
+            <div class="head"><h4>Research Assistant, Physics <small>· Nazarbayev University</small></h4><time>Apr 2023 – Jun 2024</time></div>
+            <ul><li>Research grant (2024–2026): improved star-formation models in the POLARIS simulator using Python and Go.</li></ul>
+          </div>
+          <div class="item">
+            <div class="head"><h4>Programming Tutor <small>· Freelance</small></h4><time>May 2021 – Jun 2023</time></div>
+            <ul><li>Taught Python, Go and web development; mentored students through their own projects.</li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="eyebrow">Selected work</div>
+    <h2>Projects &amp; <em>case work</em></h2>
+    <p class="sub">A mix of products we built, data challenges we took on and initiatives we led.</p>
+    <div class="projects">
+      <a class="card project reveal" href="https://github.com/belivinge" target="_blank" rel="noopener">
+        <div class="who">Aruzhan · in progress</div>
+        <h3>Resume-Bot 🤖</h3>
+        <p>A Telegram bot for candidates and recruiters with an AI layer: integrated with Gemini and OpenAI, a database of resumes, users and recruiters, and commands, buttons and polls. Built in Go for high performance.</p>
+        <div class="tags"><span>Go</span><span>Gemini</span><span>OpenAI</span><span>Telegram API</span></div>
+      </a>
+      <a class="card project reveal" href="https://github.com/belivinge" target="_blank" rel="noopener">
+        <div class="who">Aruzhan · team project</div>
+        <h3>VKontakte-style social network</h3>
+        <p>A Go web app with server-side UI templating: authentication and session management, posts and comments, likes/dislikes and filtering — covered with unit and E2E tests.</p>
+        <div class="tags"><span>Go</span><span>Templates</span><span>Auth</span><span>Testing</span></div>
+      </a>
+      <div class="card project reveal">
+        <div class="who">Aruzhan · production</div>
+        <h3>AI assistant at Kaspi.kz</h3>
+        <p>Backend of a nationwide AI assistant: vector search with HNSW for fast retrieval of relevant data, event streaming with Kafka, observability with Grafana.</p>
+        <div class="tags"><span>Vector search</span><span>HNSW</span><span>Kafka</span><span>Vert.x</span></div>
+      </div>
+      <div class="card project reveal">
+        <div class="who">Alina · data challenge</div>
+        <h3>Datathon'24 by BI Group × DataSci</h3>
+        <p>Participated in a data science hackathon by BI Group, solving a real business problem with data under time pressure.</p>
+        <div class="tags"><span>Data science</span><span>Hackathon</span></div>
+      </div>
+      <div class="card project reveal">
+        <div class="who">Alina · consulting</div>
+        <h3>Superapp &amp; banking market research</h3>
+        <p>At PwC, analyzed financial data and superapp market trends in Kazakhstan and Uzbekistan to shape strategy for the region's leading banks.</p>
+        <div class="tags"><span>Market analysis</span><span>Fintech</span><span>Strategy</span></div>
+      </div>
+      <div class="card project reveal">
+        <div class="who">Alina · community</div>
+        <h3>Danone &amp; Mars Case Championship</h3>
+        <p>Organized a case championship with 250+ participants as President of NU's Accounting and Auditing Club, plus a Big-4 championship and 17 alumni lectures.</p>
+        <div class="tags"><span>Leadership</span><span>Events</span><span>Partnerships</span></div>
+      </div>
+      <div class="card project reveal">
+        <div class="who">Aruzhan · research</div>
+        <h3>Star-formation modeling in POLARIS</h3>
+        <p>Grant-funded research improving star-formation models in the POLARIS astrophysics simulator with Python and Go.</p>
+        <div class="tags"><span>Python</span><span>Go</span><span>Simulation</span></div>
+      </div>
+      <div class="card project reveal">
+        <div class="who">Shugyla · data</div>
+        <h3>Product analytics at Kaspi.kz</h3>
+        <p>Applying SQL, Python and a Data Science master's toolkit to product data at Kazakhstan's largest superapp.</p>
+        <div class="tags"><span>SQL</span><span>Python</span><span>Analytics</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <div class="eyebrow">Why SOUL CAMP</div>
+    <h2>Ready to create <em>with AI</em></h2>
+    <div class="card reveal">
+      We already work with AI and data every day — now we want to use it <strong>creatively</strong>.
+      With <strong>strategy</strong>, <strong>analytics</strong> and <strong>engineering</strong> in one team, we can go from an idea to a working prototype in a weekend — and we can't wait to build it with Higgsfield.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="big">Soul Camp</div>
+    Alina Abdrakhmanova · Shugyla Serikbay · Aruzhan Matzhan — Almaty, 2026
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+</script>
+</body>
+</html>
